@@ -3,7 +3,8 @@ FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime
 WORKDIR /app
 
 COPY environment.yaml .
-RUN conda env create -f environment.yaml \
+RUN conda update -n base -c defaults conda\
+    && conda env create -f environment.yaml \
     && conda clean --all -f -y \
     && conda run -n enhign pip cache purge \
     && conda init bash \
