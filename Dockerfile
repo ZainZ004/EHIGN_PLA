@@ -3,8 +3,8 @@ FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime
 WORKDIR /app
 
 COPY environment.yaml .
-RUN conda update -n base -c defaults conda\
-    && conda env create -f environment.yaml \
+COPY requirements.txt .
+RUN conda env create -f environment.yaml \
     && conda run -n enhign pip install backports.tarfile \
     && conda run -n enhign pip install -U setuptools \
     && conda run -n enhign pip install -r requirements.txt \
