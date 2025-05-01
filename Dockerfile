@@ -5,6 +5,8 @@ WORKDIR /app
 COPY environment.yaml .
 RUN conda update -n base -c defaults conda\
     && conda env create -f environment.yaml \
+    && conda run -n enhign pip install backports.tarfile \
+    && conda run -n enhign pip install -U setuptools \
     && conda run -n enhign pip install -r requirements.txt \
     && conda clean --all -f -y \
     && conda run -n enhign pip cache purge \
